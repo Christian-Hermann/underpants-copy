@@ -3,7 +3,10 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 'use strict';
 
+// functional library
+
 var _ = {};
+
 
 
 /**
@@ -21,6 +24,9 @@ var _ = {};
 *   _.identity({a: "b"}) === {a: "b"}
 */
 
+_.identity = function(value){
+    return value;
+};
 
 /** _.typeOf
 * Arguments:
@@ -42,6 +48,18 @@ var _ = {};
 * _.typeOf([1,2,3]) -> "array"
 */
 
+_.typeOf = function(value){
+
+if (value === null){
+    return 'null';
+}
+if (Array.isArray(value)){
+    return 'array';
+}
+
+return typeof value   
+};
+
 
 /** _.first
 * Arguments:
@@ -60,6 +78,25 @@ var _ = {};
 *   _.first(["a", "b", "c"], 1) -> "a"
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
+
+_.first = function (array, number) {
+if (!Array.isArray(array)){
+    return [];
+}
+if (typeof number !== 'number') {
+    return array[0];
+}
+if (number < 0) {
+    return [];
+}
+if (number > array.length) {
+    return array;
+}
+return array.slice(0, number);
+
+
+};
+
 
 
 /** _.last
@@ -158,6 +195,21 @@ var _ = {};
 *   use _.each in your implementation
 */
 
+_.filter = function(array, func){
+  const output = [];
+
+for (let i = 0; i < array.length; i++){
+    if(func(array[i], i, array) === true){
+        output.push(array[i]);
+    }
+}
+
+return output;
+};
+
+
+
+
 
 /** _.reject
 * Arguments:
@@ -208,6 +260,30 @@ var _ = {};
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
+
+
+_.map = function(collection, func){
+
+const output = [];
+if (Array.isArray(collection)){
+    for (let i = 0; i < collection.length; i++){
+        let result = func(collection[i], i, collection);
+        output.push(result);
+    }
+} else {
+    for (let key in collection){
+
+    }
+}
+    
+return output;
+};
+
+// purpose of the callback function
+// to be invoked on an indivdidual item in the array 
+
+
+
 
 
 /** _.pluck

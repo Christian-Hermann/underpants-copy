@@ -178,7 +178,8 @@ _.indexOf = function(array, value){
 */
 
 _.contains = function(array, value){
-    return Array.isArray(array) && value !== undefined ? 
+
+
 }
 
 /** _.each
@@ -196,6 +197,8 @@ _.contains = function(array, value){
 *   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
 *      -> should log "a" "b" "c" to the console
 */
+
+_.each = function(collection, func)
 
 
 /** _.unique

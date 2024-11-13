@@ -198,7 +198,21 @@ _.contains = function(array, value){
 *      -> should log "a" "b" "c" to the console
 */
 
-_.each = function(collection, func)
+_.each = function(collection, func){
+if (Array.isArray(collection)){
+    for (var i = 0; i < collection.length; i++){
+        func(collection[i], i, collection);
+    }
+} 
+else if (typeof collection === 'object' && collection !== null){
+    for(var key in collection){
+        func(collection[key], key, collection);
+    }
+}
+
+
+
+}
 
 
 /** _.unique

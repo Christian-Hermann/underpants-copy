@@ -117,6 +117,21 @@ return array.slice(0, number);
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
 
+_.last = function(array, number){
+    if(!Array.isArray(array)){
+        return [];
+    }
+    if(typeof number !== 'number' || number === undefined){
+        return array[array.length - 1];
+    }
+    if(number < 0){
+        return [];
+    }
+    if(number >= array.length){
+        return array;
+    }
+    return array.splice(array.length - number);
+}
 
 /** _.indexOf
 * Arguments:
@@ -134,6 +149,18 @@ return array.slice(0, number);
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
 
+_.indexOf = function(array, value){
+    if(!Array.isArray(array)){
+        return -1;
+    }
+    for(let i = 0; i < array.length; i++){
+        if(array[i] === value){
+            return i;
+        }
+    }
+    return -1;
+}
+
 
 /** _.contains
 * Arguments:
@@ -150,6 +177,9 @@ return array.slice(0, number);
 *   _.contains([1,"two", 3.14], "two") -> true
 */
 
+_.contains = function(array, value){
+    return Array.isArray(array) && value !== undefined ? 
+}
 
 /** _.each
 * Arguments:
@@ -319,6 +349,9 @@ return output;
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
 
+_.every = function(collection, func){
+
+}
 
 /** _.some
 * Arguments:

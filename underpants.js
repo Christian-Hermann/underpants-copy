@@ -178,8 +178,11 @@ _.indexOf = function(array, value){
 */
 
 _.contains = function(array, value){
-
-
+let element = false;
+for (let i = 0; i < array.length; i++){
+    element = array[i] === value ? true : element;
+}
+ return element;
 }
 
 /** _.each
@@ -224,6 +227,17 @@ else if (typeof collection === 'object' && collection !== null){
 * Examples:
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
+
+_.unique = function(array) {
+    let element = [];
+    for (let i = 0; i < array.length; i++){
+        if(_.indexOf(element, array[i]) === -1){
+            element.push(array[i]);
+        }
+    }
+   return element
+}
+
 
 
 /** _.filter

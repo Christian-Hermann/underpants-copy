@@ -285,6 +285,18 @@ return output;
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
 
+_.reject = function(array, func){
+let newArray = [];
+for (let i = 0; i < array.length; i++){
+     if(!func(array[i], i, array)){
+         newArray.push(array[i]);
+     }
+}
+return newArray;
+
+
+}
+
 
 /** _.partition
 * Arguments:
@@ -324,21 +336,19 @@ return output;
 
 
 _.map = function(collection, func){
+let newArray = [];
 
-const output = [];
-if (Array.isArray(collection)){
-    for (let i = 0; i < collection.length; i++){
-        let result = func(collection[i], i, collection);
-        output.push(result);
+if (collection.length !== undefined){
+    for( let i = 0; i < collection.length; i++){
+        newArray.push(func(collection[i], i, collection));
     }
 } else {
     for (let key in collection){
-
+        newArray.push(func(collection[key], key, collection));
     }
 }
-    
-return output;
-};
+ return newArray;
+}
 
 // purpose of the callback function
 // to be invoked on an indivdidual item in the array 
@@ -381,7 +391,28 @@ return output;
 */
 
 _.every = function(collection, func){
+  if(Array.isArray(collection)){
+    if (func === undefined){
+        for(let i = 0; i < collection.length; i++){
+            if (!collection[i]){
+                return false;
+            }
+        }
+    } else {
+        for (let i = 0; i < collection.length; i++){
+            if (!func(collection[i], i, collection)){
+                return false;
+            }
+        }
+    }
+  } else {
+    if (func === undefined){
 
+    } else {
+
+    }
+  }
+  return true;
 }
 
 /** _.some

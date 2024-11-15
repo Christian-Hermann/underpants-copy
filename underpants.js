@@ -317,6 +317,27 @@ return newArray;
 }
 */
 
+_.partition = function(array, func){
+     // initialize two arrays to hold truthy and falsy values
+    const truthy = [];
+    const falsy = [];
+      // iterate over array
+    for (let i = 0; i < array.length; i++) {
+        const element = array[i];
+      // call function with element index and array
+        if (func(element, i, array)){
+        // if truthy push to truthy array
+            truthy.push(element);
+        // if falsy push to falsy array
+        }else {
+            falsy.push(element);
+        }
+    }
+    // return an array woth both arrays
+    return [truthy, falsy];
+
+}
+
 
 /** _.map
 * Arguments:
@@ -367,6 +388,15 @@ if (collection.length !== undefined){
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
+
+_.pluck = function(array, property){
+    // use map to iterate through the array and take out property from array
+ return array.map(function(element){
+    // return the value of the property
+    return element[property];
+ });
+
+}
 
 
 /** _.every
@@ -436,6 +466,41 @@ _.every = function(collection, func){
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
 
+_.some = function(collection, func){
+    // if no function is provided
+    if (func === undefined){
+        // check if any elment is truthy
+        for(let value of collection){
+            if(value) {
+        // return true is value is truthy
+                return true;
+            }
+        }
+        return false;
+    }
+    // if an array loop through the collection to see if it is truthy
+    if (Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++){
+            if(func(collection[i], i, collection)){
+                return true;
+            }
+        }
+    }else{
+    // if an objet loop through the collection to ee if it is truthy
+        for(let key in collection){
+    // if collection has object key and functionretun true
+            if (collection.hasOwnProperty(key) && func(collection[key], key, collection)){
+               return true 
+            }
+            
+        }
+    }
+      
+    return false
+
+
+}
+
 
 /** _.reduce
 * Arguments:
@@ -455,6 +520,26 @@ _.every = function(collection, func){
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
+
+_.reduce = function(array, func, seed){
+   let output;
+    // determine if seed value was not provided 
+    if (seed === undefined){
+        output = array[0];
+        for (let i = 1; i < array.length; i++){
+            // reassign output to the result of invoking the callback function
+            output = func(output, array[i], i);
+        }
+    } else {
+         output = seed;
+         for (let i = 0; i < array.length; i++){
+            // reassign output to the result of invoking the callback function
+             output = func(output, array[i], i);
+         }
+    }
+    return output;
+};
+
 
 
 /** _.extend

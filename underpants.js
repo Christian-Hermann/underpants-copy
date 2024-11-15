@@ -557,6 +557,25 @@ _.reduce = function(array, func, seed){
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
 
+_.extend = function(target, ...sources){
+    // loop through each source object
+    for (let source of sources){
+        // loop through each property in the source object
+        for (let key in source){
+      // use hasownproperty to only copy its own properties
+            if(source.hasOwnProperty(key)){
+      // copy property to the target object          
+                target[key] = source[key];
+            }
+        }
+    }
+    // return target objeect
+    return target;
+}
+
+
+
+
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
